@@ -4,14 +4,16 @@ using UnityEngine.UI;
 
 public class PereodicalScript : MonoBehaviour
 {
-    [SerializeField] SpriteClicker spriteClicker;
+    public SpriteClicker spriteClicker;
     [SerializeField] float duration;
     [SerializeField] float damage;
     [SerializeField] Image damageImage;
     private float timer = 0;
+    
     private void Update()
     {
         timer += Time.deltaTime;
+        damageImage.fillAmount = timer / duration;
         if (timer >= duration)
         {
             spriteClicker.GetDamage(damage);
