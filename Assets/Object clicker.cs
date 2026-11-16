@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,27 +14,41 @@ public class SpriteClicker : MonoBehaviour
     private float dmg;
     [SerializeField] public InformationObject Inf;
     [SerializeField] private float obj_score;
+    [SerializeField] public ParticleSystem myParticle;
     
     private void Awake()
     {
         health = MaxHealth;
+        myParticle.Stop();
     }
     public void OnMouseDown()
     {
         Inf.Score++;
-        health -= Inf.damage;
-        HealthBar.fillAmount = health/MaxHealth;
+        GetDamage(obj_score);
         gameObject.transform.localScale = Vector3.one * 0.9f;
+        StartCoroutine(CoroutineDamage());
+    }
+
+    public void OnMouseUp()
+    {
+        gameObject.transform.localScale = Vector3.one;
+    }
+
+    private IEnumerator CoroutineDamage()
+    {
+        
+        myParticle.Play();
+        yield return new WaitForSeconds(0.5f);
+        myParticle.Stop();
+    }
+
+    public void GetDamage(float damageAc)
+    {
         if (health <= 0)
         {
             Inf.Score += obj_score;
             health = MaxHealth;
             HealthBar.fillAmount = health/MaxHealth;
         }
-    }
-
-    public void OnMouseUp()
-    {
-        gameObject.transform.localScale = Vector3.one;
     }
 }
