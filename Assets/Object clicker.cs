@@ -8,7 +8,7 @@ using UnityEngine.UI;
 [Serializable]
 public class SpriteClicker : MonoBehaviour
 {
-    public int score = 0;
+    public int score;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] private float MaxHealth;
     private float health;

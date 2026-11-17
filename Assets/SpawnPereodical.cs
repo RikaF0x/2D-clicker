@@ -12,7 +12,9 @@ public class SpawnPereodical : MonoBehaviour
     [SerializeField] private float price;
     [SerializeField] private float price_scale;
     [SerializeField] private TextMeshProUGUI priceText;
+    [SerializeField] private TextMeshProUGUI colText;
     [SerializeField] private GameObject target;
+    private int col = 0;
     private void Awake()
     {
         buyButton.onClick.AddListener(Spawn);
@@ -27,9 +29,12 @@ public class SpawnPereodical : MonoBehaviour
             {
                 srenderer.GetComponent<PereodicalScript>().spriteClicker = sprite;
             }
+
+            col += 1;
             inf.Score -= price;
             price *= price_scale;
             priceText.text = price.ToString();
+            colText.text = $"GrandFather: {col}";;
         }
     }
 }

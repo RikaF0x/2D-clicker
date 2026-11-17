@@ -12,12 +12,11 @@ public class InformationObject : MonoBehaviour
         set
         {
             score = value;
-            scoreText.text = score.ToString("0.00");
+            scoreText.text = $"Score: {score}"; //score.ToString("0.00");
         }
     }
 
     private void Awake()
     {
-        Score = 0;
     }
 }
